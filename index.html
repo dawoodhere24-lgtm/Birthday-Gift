@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>the girl behind the smile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!--
+════════════════════════════════════════════════════════════════
+  THE GIRL BEHIND THE SMILE
+  ── SETUP GUIDE FOR NON-CODERS ──────────────────────────────
+
+  HOW TO ADD PHOTOS:
+  ─────────────────
+  1. Put all your image files in the same folder as index.html
+  2. Name them exactly as shown in the comments (e.g. "childhood1.jpg")
+  3. Supported formats: .jpg  .jpeg  .png  .webp
+  4. Tip: resize photos to max 1200px wide to keep the site fast
+
+  HOW TO ADD MUSIC:
+  ─────────────────
+  1. Put your .mp3 file in the same folder as index.html
+  2. Name it exactly: song.mp3
+  3. It will play (with user permission) in the Birthday section
+
+  HOW TO CHANGE TEXT:
+  ───────────────────
+  Search for the comment:  ✏️ EDIT:
+  Everything immediately below that comment is text you should replace.
+  Replace the placeholder text with your own words.
+
+  HOW TO ADD MORE STARS:
+  ──────────────────────
+  Open script.js and find the section labelled:
+    ★ STARS DATA — ADD YOUR OWN STARS HERE ★
+  Copy any existing star object and paste it below, then change
+  the title and text fields.
+
+  HOW TO ADD MORE LETTERS:
+  ────────────────────────
+  Open script.js and find the section labelled:
+    ✉ LETTERS DATA — EDIT YOUR LETTERS HERE ✉
+  Copy any existing letter object and paste it below.
+  In index.html, copy any envelope button and give it a matching data-letter value.
+
+════════════════════════════════════════════════════════════════
+-->
+
+<!-- Global starfield canvas (always visible behind everything) -->
+<canvas id="starfield"></canvas>
+
+<!-- Cursor glow -->
+<div id="cursorGlow"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     OPENING / HERO SCREEN
+════════════════════════════════════════════════════════════ -->
+<section id="opening">
+  <div class="shooting-stars">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="opening-inner">
+    <p class="pre-title">a birthday gift, crafted with everything</p>
+
+    <!-- ✏️ EDIT: Change her name below -->
+    <h1 class="hero-name">her name</h1>
+
+    <div class="hero-divider">
+      <span class="hero-line"></span>
+      <span class="hero-glyph">✦</span>
+      <span class="hero-line"></span>
+    </div>
+
+    <p class="hero-subtitle">the girl behind the smile</p>
+
+    <!-- ✏️ EDIT: A one-sentence description of who she is to you -->
+    <p class="hero-desc">the one who changed the temperature of the room just by existing in it</p>
+
+    <button id="enterBtn" class="enter-btn">
+      <span class="enter-label">enter</span>
+      <span class="enter-ring"></span>
+    </button>
+  </div>
+
+  <!-- Decorative floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SITE BODY (hidden until Enter is pressed)
+════════════════════════════════════════════════════════════ -->
+<div id="siteBody" class="site-hidden">
+
+  <!-- Sticky navigation -->
+  <nav id="siteNav">
+    <button class="nav-item active" data-target="s1">before you</button>
+    <button class="nav-item" data-target="s2">don't see</button>
+    <button class="nav-item" data-target="s3">proof</button>
+    <button class="nav-item" data-target="s4">never change</button>
+    <button class="nav-item" data-target="s5">stars</button>
+    <button class="nav-item" data-target="s6">letters</button>
+    <button class="nav-item" data-target="s7">birthday</button>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 1 · BEFORE I MET YOU
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter" id="s1">
+    <div class="chapter-head reveal">
+      <span class="ch-num">01</span>
+      <h2>before<br><em>i met you</em></h2>
+      <!-- ✏️ EDIT: Intro paragraph for this section -->
+      <p class="ch-intro">The story of you didn't start when I showed up. It started long before — in chapters I wasn't there to see, but that shaped every single thing I love about you.</p>
+    </div>
+
+    <div class="before-grid">
+
+      <!--
+        PHOTO CARD 1
+        📷 IMAGE: Place a file named  childhood1.jpg  in the same folder as index.html
+        ✏️ EDIT: Change the year, caption, and paragraph below
+      -->
+      <article class="before-card reveal" style="--delay:0s">
+        <div class="bc-photo" style="background-image:url('childhood1.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>childhood1.jpg</small></div>
+        </div>
+        <div class="bc-info">
+          <span class="bc-year">— the beginning —</span>
+          <h3>her title here</h3>
+          <!-- ✏️ EDIT: Write about her childhood or early years here -->
+          <p>Write about something from her early life — a memory, a trait she always had, something she probably doesn't remember but someone told you about. Make it feel like you really know her history.</p>
+        </div>
+      </article>
+
+      <!--
+        PHOTO CARD 2
+        📷 IMAGE: Place a file named  childhood2.jpg  in the same folder as index.html
+        ✏️ EDIT: Change the year, caption, and paragraph below
+      -->
+      <article class="before-card reveal" style="--delay:.1s">
+        <div class="bc-photo" style="background-image:url('childhood2.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>childhood2.jpg</small></div>
+        </div>
+        <div class="bc-info">
+          <span class="bc-year">— growing up —</span>
+          <h3>her title here</h3>
+          <!-- ✏️ EDIT: Write about her growing-up years, her dreams, her personality back then -->
+          <p>What was she like as she grew? What dreams did she carry? Write about the version of her that existed before anyone was paying close enough attention.</p>
+        </div>
+      </article>
+
+      <!--
+        PHOTO CARD 3
+        📷 IMAGE: Place a file named  childhood3.jpg  in the same folder as index.html
+        ✏️ EDIT: Change the year, caption, and paragraph below
+      -->
+      <article class="before-card reveal" style="--delay:.2s">
+        <div class="bc-photo" style="background-image:url('childhood3.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>childhood3.jpg</small></div>
+        </div>
+        <div class="bc-info">
+          <span class="bc-year">— becoming —</span>
+          <h3>her title here</h3>
+          <!-- ✏️ EDIT: Write about who she was becoming, a turning point or milestone -->
+          <p>Describe a chapter of her life — something that shaped her or tested her. Something she came out of differently than she went in. Something that became part of who she is now.</p>
+        </div>
+      </article>
+
+      <!--
+        PHOTO CARD 4
+        📷 IMAGE: Place a file named  childhood4.jpg  in the same folder as index.html
+        ✏️ EDIT: Change the year, caption, and paragraph below
+      -->
+      <article class="before-card reveal" style="--delay:.3s">
+        <div class="bc-photo" style="background-image:url('childhood4.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>childhood4.jpg</small></div>
+        </div>
+        <div class="bc-info">
+          <span class="bc-year">— just before —</span>
+          <h3>her title here</h3>
+          <!-- ✏️ EDIT: Write about the version of her right before your paths crossed -->
+          <p>What was she doing the year before you met? Who was she the day before everything shifted? This is her story — tell it with the love it deserves.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <blockquote class="chapter-quote reveal">
+      <!-- ✏️ EDIT: A poetic line that summarises her "before" story -->
+      "every chapter she lived without me was quietly writing the person i'd fall for."
+    </blockquote>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 2 · THINGS YOU DON'T REALISE ABOUT YOURSELF
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter chapter-dark" id="s2">
+    <div class="chapter-head reveal">
+      <span class="ch-num">02</span>
+      <h2>things you don't<br><em>realise about yourself</em></h2>
+      <!-- ✏️ EDIT: Intro sentence for this section -->
+      <p class="ch-intro">The things she's blind to. The truths she needs to hear. Tap each card to open it.</p>
+    </div>
+
+    <div class="flip-grid">
+
+      <!--
+        COMPLIMENT CARDS — tap to flip
+        ✏️ EDIT: Change the icon, front label, and back paragraph for each card
+        Add more cards by copying this block
+      -->
+
+      <div class="flip-card reveal" style="--delay:0s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">✨</span>
+            <!-- ✏️ EDIT: Front label (short — 2–4 words) -->
+            <p>her light</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT: The truth she needs to hear about this quality -->
+            <p>You walk into a room and something shifts. You don't feel it — but everyone else does. That's not a coincidence. That's you, every single time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.08s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">🌙</span>
+            <!-- ✏️ EDIT -->
+            <p>her mind</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>The way she thinks — really thinks — is rare. She goes to places most minds don't even try to visit. She notices things. She asks better questions. That's a gift.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.16s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">🌸</span>
+            <!-- ✏️ EDIT -->
+            <p>her kindness</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>She cares in the way she doesn't talk about — checking in, remembering, showing up quietly. That kind of love doesn't announce itself. It just proves itself, again and again.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.24s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">💫</span>
+            <!-- ✏️ EDIT -->
+            <p>her strength</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>She has been through things that would've broken someone less made. She came out softer, not harder. That is not a small thing. That is one of the bravest things a person can do.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.32s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">🌹</span>
+            <!-- ✏️ EDIT -->
+            <p>her beauty</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>She is most beautiful in the unplanned moments. Mid-laugh. Half-asleep. Lost in thought. When she has no idea anyone is watching. Especially then.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.4s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">🦋</span>
+            <!-- ✏️ EDIT -->
+            <p>her laugh</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>Her real laugh — the loud one she tries to suppress — is one of the greatest sounds in the world. I would embarrass myself completely, on purpose, just to hear it again.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.48s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">💎</span>
+            <!-- ✏️ EDIT -->
+            <p>her worth</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>She deserves every good thing — not because she's perfect, but because she keeps trying. Quietly. Without applause. Without needing anyone to notice. That's rare. That's worth everything.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal" style="--delay:.56s" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="flip-icon">⭐</span>
+            <!-- ✏️ EDIT -->
+            <p>her effect</p>
+          </div>
+          <div class="flip-back">
+            <!-- ✏️ EDIT -->
+            <p>She doesn't realise how much space she takes up in the people who love her. Not in a demanding way — in the way a song gets stuck in your head and you don't mind at all.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote class="chapter-quote reveal">
+      <!-- ✏️ EDIT -->
+      "she is a collection of beautiful things she has never allowed herself to fully see."
+    </blockquote>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 3 · PROOF THAT YOU MATTER
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter" id="s3">
+    <div class="chapter-head reveal">
+      <span class="ch-num">03</span>
+      <h2>proof that<br><em>you matter</em></h2>
+      <!-- ✏️ EDIT: Intro sentence for this section -->
+      <p class="ch-intro">She has probably never sat down and counted the lives she's quietly made better. So I did it for her.</p>
+    </div>
+
+    <div class="proof-list">
+
+      <!--
+        PROOF ITEMS — concrete examples of how she has impacted people
+        ✏️ EDIT: Replace each proof item with a real example from her life
+        Add more by copying a .proof-item block
+      -->
+
+      <div class="proof-item reveal" style="--delay:0s">
+        <span class="proof-glyph">01</span>
+        <div class="proof-content">
+          <!-- ✏️ EDIT: A specific way she made someone's life better -->
+          <h3>she stayed</h3>
+          <p>Write about a time she showed up for someone who needed her — even when it was inconvenient, even when she had nothing left to give. The people who stay are rare. She's one of them.</p>
+        </div>
+      </div>
+
+      <div class="proof-item reveal" style="--delay:.1s">
+        <span class="proof-glyph">02</span>
+        <div class="proof-content">
+          <!-- ✏️ EDIT -->
+          <h3>she listened</h3>
+          <p>Write about a time she truly listened to someone. Not waiting to talk — actually listening. The kind that makes you feel like the most important person in the room. She does that without trying.</p>
+        </div>
+      </div>
+
+      <div class="proof-item reveal" style="--delay:.2s">
+        <span class="proof-glyph">03</span>
+        <div class="proof-content">
+          <!-- ✏️ EDIT -->
+          <h3>she remembered</h3>
+          <p>Write about a time she remembered something small — a detail, a date, a preference — that someone mentioned once, in passing. That kind of attention tells someone they matter. She gave that freely.</p>
+        </div>
+      </div>
+
+      <div class="proof-item reveal" style="--delay:.3s">
+        <span class="proof-glyph">04</span>
+        <div class="proof-content">
+          <!-- ✏️ EDIT -->
+          <h3>she changed something in me</h3>
+          <p>Write about a specific way she made you better — a habit, a perspective, a version of yourself you didn't know existed before you knew her. Be specific. Be honest. Tell her exactly what she moved in you.</p>
+        </div>
+      </div>
+
+      <div class="proof-item reveal" style="--delay:.4s">
+        <span class="proof-glyph">05</span>
+        <div class="proof-content">
+          <!-- ✏️ EDIT -->
+          <h3>she made it easier</h3>
+          <p>Write about a time her presence — even without doing anything specific — just made something harder feel lighter. That's an underrated gift. Not everyone has it. She does.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote class="chapter-quote reveal">
+      <!-- ✏️ EDIT -->
+      "she has quietly, consistently, without asking for recognition, made the world better by being in it."
+    </blockquote>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 4 · THINGS I HOPE NEVER CHANGE
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter chapter-dark" id="s4">
+    <div class="chapter-head reveal">
+      <span class="ch-num">04</span>
+      <h2>things i hope<br><em>never change</em></h2>
+      <!-- ✏️ EDIT: Intro sentence -->
+      <p class="ch-intro">The small things. The specific things. The things that are so completely her that the world would notice if they disappeared.</p>
+    </div>
+
+    <div class="never-grid">
+
+      <!--
+        "NEVER CHANGE" CARDS
+        ✏️ EDIT: Fill each card with a specific, personal detail about her
+        The more specific, the better — she should feel truly seen
+        Add more by copying a .nc-card block
+      -->
+
+      <div class="nc-card reveal" style="--delay:0s">
+        <span class="nc-icon">🌙</span>
+        <!-- ✏️ EDIT: Short label (2–4 words) -->
+        <h3>the way she laughs</h3>
+        <!-- ✏️ EDIT: Describe this specific thing about her in warm, specific detail -->
+        <p>Write about a specific habit or quirk — the way she laughs at her own jokes before finishing them, the way she gets animated when she talks about something she loves. Make it so specific she gasps when she reads it.</p>
+      </div>
+
+      <div class="nc-card reveal" style="--delay:.1s">
+        <span class="nc-icon">✨</span>
+        <!-- ✏️ EDIT -->
+        <h3>how she texts</h3>
+        <!-- ✏️ EDIT -->
+        <p>Write about something specific about her texting style, her voice notes, her reactions — a tiny digital quirk that is completely her. Something you'd recognise anywhere.</p>
+      </div>
+
+      <div class="nc-card reveal" style="--delay:.2s">
+        <span class="nc-icon">🌸</span>
+        <!-- ✏️ EDIT -->
+        <h3>the face she makes</h3>
+        <!-- ✏️ EDIT -->
+        <p>Describe a specific facial expression she makes — when she's trying not to laugh, when she's pretending to be annoyed, when something genuinely surprises her. She probably doesn't know she does it.</p>
+      </div>
+
+      <div class="nc-card reveal" style="--delay:.3s">
+        <span class="nc-icon">💫</span>
+        <!-- ✏️ EDIT -->
+        <h3>how she cares</h3>
+        <!-- ✏️ EDIT -->
+        <p>Write about a specific, small way she shows she cares — something she does without thinking, without credit, without announcement. The kind of love that only people paying close attention would ever even catch.</p>
+      </div>
+
+      <div class="nc-card reveal" style="--delay:.4s">
+        <span class="nc-icon">🦋</span>
+        <!-- ✏️ EDIT -->
+        <h3>her stubbornness</h3>
+        <!-- ✏️ EDIT -->
+        <p>Write about a quality that might look like a flaw from the outside — her stubbornness, her overthinking, her tendency to feel everything deeply — and explain why you hope she never loses it.</p>
+      </div>
+
+      <div class="nc-card reveal" style="--delay:.5s">
+        <span class="nc-icon">⭐</span>
+        <!-- ✏️ EDIT -->
+        <h3>the way she loves</h3>
+        <!-- ✏️ EDIT -->
+        <p>Describe her love style — the way she shows up, the way she expresses care, the way she makes people feel chosen. Be specific. Be vulnerable. Let her know you notice every single part of it.</p>
+      </div>
+
+    </div>
+
+    <blockquote class="chapter-quote reveal">
+      <!-- ✏️ EDIT -->
+      "i hope she stays exactly this unfinished, this real, this completely herself."
+    </blockquote>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 5 · THE STARS ROOM
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter chapter-stars" id="s5">
+    <div class="chapter-head chapter-head-overlay reveal">
+      <span class="ch-num">05</span>
+      <h2>the stars<br><em>room</em></h2>
+      <p class="ch-intro">Every star holds something. Tap one — let the sky speak.</p>
+    </div>
+
+    <!-- Interactive star canvas — populated by script.js -->
+    <canvas id="starRoom"></canvas>
+    <p class="stars-hint">✦ &nbsp; tap any star &nbsp; ✦</p>
+
+    <!-- Star modal -->
+    <div class="modal-overlay" id="starOverlay">
+      <div class="modal-box">
+        <button class="modal-close" id="starClose">✕</button>
+        <span class="modal-star-icon">✦</span>
+        <h3 id="starTitle"></h3>
+        <p id="starText"></p>
+      </div>
+    </div>
+  </section>
+
+<section class="chapter" id="s6" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 20px; box-sizing: border-box; overflow: hidden;">
+    
+    <div class="chapter-head reveal" style="margin-bottom: 15px; text-align: center;">
+      <span class="ch-num" style="display: block; font-size: 0.85rem; opacity: 0.5;">06</span>
+      <h2 style="font-size: 1.5rem; margin: 5px 0; text-transform: lowercase;">letters for<br><em>difficult days</em></h2>
+      <p class="ch-intro" style="font-size: 0.85rem; opacity: 0.7; margin: 0;">written for the moments before they arrive. open whichever one finds you.</p>
+    </div>
+
+    <div class="envelopes-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; width: 100%; max-width: 500px; margin: 0 auto; padding: 5px;">
+
+      <div class="env-wrap reveal" style="--delay:0s">
+        <button class="envelope" data-letter="sad">
+          <div class="env-flap"></div>
+          <div class="env-body">
+            <span class="env-wax">✦</span>
+            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you're sad</p>
+            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for the heavy days</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="env-wrap reveal" style="--delay:.1s">
+        <button class="envelope" data-letter="overthinking">
+          <div class="env-flap"></div>
+          <div class="env-body">
+            <span class="env-wax">✦</span>
+            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you're overthinking</p>
+            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">when your mind won't stop</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="env-wrap reveal" style="--delay:.2s">
+        <button class="envelope" data-letter="insecure">
+          <div class="env-flap"></div>
+          <div class="env-body">
+            <span class="env-wax">✦</span>
+            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you feel insecure</p>
+            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">a reminder of who you are</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="env-wrap reveal" style="--delay:.3s">
+        <button class="envelope" data-letter="miss">
+          <div class="env-flap"></div>
+          <div class="env-body">
+            <span class="env-wax">✦</span>
+            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you miss me</p>
+            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for the quiet, lonely moments</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="env-wrap reveal" style="--delay:.4s">
+        <button class="envelope" data-letter="reminder">
+          <div class="env-flap"></div>
+          <div class="env-body">
+            <span class="env-wax">✦</span>
+            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when you need<br>a reminder</p>
+            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for when you forget</p>
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="modal-overlay" id="letterOverlay">
+      <div class="letter-paper">
+        <button class="modal-close letter-close" id="letterClose">✕</button>
+        <div class="letter-top">✦ &nbsp; ✦ &nbsp; ✦</div>
+        <h3 id="letterHeading" class="letter-heading" style="text-transform: lowercase;"></h3>
+        <div class="letter-rule"></div>
+        <div id="letterBody" class="letter-body" style="text-transform: lowercase;"></div>
+        <p class="letter-sig" style="text-transform: lowercase;">with everything i have,<br><em>— your person</em></p>
+      </div>
+    </div>
+  </section>
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 7 · BIRTHDAY FINALE
+  ══════════════════════════════════════════════════════ -->
+  <section class="chapter chapter-dark chapter-birthday" id="s7">
+
+    <!--
+      MUSIC
+      📷 AUDIO: Place a file named  song.mp3  in the same folder as index.html
+    -->
+    <audio id="bgMusic" loop preload="none">
+      <source src="song.mp3" type="audio/mpeg" />
+    </audio>
+    <button id="musicBtn" class="music-btn" title="toggle music" aria-label="Toggle music">♪</button>
+
+    <div class="bday-inner">
+
+      <!-- Photo strip at top -->
+      <div class="bday-photos reveal">
+        <!--
+          BIRTHDAY PHOTOS
+          📷 IMAGE: Place files named  bday1.jpg  bday2.jpg  bday3.jpg  in the same folder
+          You can add or remove <div class="bday-photo"> items as needed
+        -->
+        <div class="bday-photo" style="background-image:url('bday1.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>bday1.jpg</small></div>
+        </div>
+        <div class="bday-photo bday-photo--tall" style="background-image:url('bday2.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>bday2.jpg</small></div>
+        </div>
+        <div class="bday-photo" style="background-image:url('bday3.jpg')">
+          <div class="bc-photo-fallback">📷<br><small>bday3.jpg</small></div>
+        </div>
+      </div>
+
+      <div class="bday-text reveal">
+        <p class="bday-eyebrow">✦ &nbsp; happy birthday &nbsp; ✦</p>
+
+        <!-- ✏️ EDIT: Faryal Dawood -->
+        <h2 class="bday-name">her name</h2>
+
+        <div class="bday-rule"></div>
+
+        <!--
+          THE BIRTHDAY LETTER
+          ✏️ EDIT: Replace every paragraph with your own words.
+          This is the centrepiece — write it like no one will read it but her.
+          Be specific. Be honest. Don't hold anything back.
+        -->
+        <div class="bday-letter">
+
+          <p><!-- ✏️ EDIT: Opening line -->i don't have the right words. i never do when it comes to you. but i'm going to try anyway, because someone as special as you deserves more than a quick "happy birthday." you deserve to know how much light you bring into the lives around you, and how much brighter mine became the moment you walked into it.</p>
+
+          <p><!-- ✏️ EDIT: Something specific about her that you love -->one thing i've never forgotten is the way you get excited when you're talking about something you genuinely care about. the way your messages suddenly get longer, the way you keep going even when you think you're talking too much, and the way i could sit there for hours just reading every word. i don't think you realize how beautiful that is. i don't think you realize how beautiful you are in those moments, when you're completely yourself and not trying to impress anyone.</p>
+
+          <p><!-- ✏️ EDIT: What she means to you -->you've become such a huge part of my life that it's hard to remember what things felt like before you. somehow you've managed to make ordinary days feel less ordinary. you've been there through my good moods, my bad moods, my random thoughts, my stupid jokes, and all the parts of me that aren't always easy to deal with. and through all of it, you've given me memories, comfort, laughter, and happiness that i genuinely wouldn't trade for anything.</p>
+
+          <p><!-- ✏️ EDIT: What you wish for her on this birthday -->more than anything, i hope you find peace with yourself. i hope one day you see even a fraction of what everyone else sees when they look at you. i hope you stop being so hard on yourself. i hope you chase the things that make you happy without doubting whether you're good enough, because you are. i hope you wake up every morning knowing that you deserve kindness, love, success, and every good thing that comes your way. not because you've earned it by being perfect, but because you're already enough exactly as you are.
+
+and for the record, you do not need to lose weight, change yourself, or become somebody else to be beautiful. you already are. i've never looked at you and thought about what should be different. i've only ever looked at you and thought about how lucky i am that you exist.</p>
+
+          <p class="bday-final">
+            <!-- ✏️ EDIT: final closing truth
+
+if there's one thing i wish i could make you believe, it's this: the people who love you aren't loving some future version of you. they aren't waiting for you to be prettier, funnier, smarter, thinner, or more successful. they love you now. exactly as you are. and i do too.
+
+the truth is that you have no idea how much of an impact you leave behind everywhere you go. you make people smile without realizing it. you make bad days easier without trying. you make the world feel warmer just by being in it.
+
+and maybe one day years from now you'll forget some of the gifts you've received, some of the photos you've taken, and some of the birthdays you've celebrated. but i hope you never forget this:
+
+the world became a better place the day you were born.
+
+and my world became a better place the day i met you.
+
+happy birthday, my favorite person. 🫶 -->
+            "thank you for being born. because if you weren't, i never would have met the person who quietly, permanently rearranged everything."
+          </p>
+
+        </div>
+
+        <div class="bday-rule"></div>
+
+        <!-- ✏️ EDIT: Faryal Dawood -->
+        <p class="bday-from">forever yours,<br><em>— Dawood</em></p>
+
+        <button id="confettiBtn" class="confetti-btn">🎂 &nbsp; happy birthday &nbsp; 🎂</button>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confetti" aria-hidden="true"></div>
+  </section>
+
+</div><!-- /siteBody -->
+
+<script src="script.js"></script>
+</body>
+</html>
