@@ -1,689 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>the girl behind the smile</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Faryal Dawood</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Pinyon+Script&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blk:#03030a;--deep:#06061a;--navy:#080820;
+  --gold:#c8a264;--gold2:#e5c882;--cream:#f3ebd9;
+  --muted:rgba(243,235,217,.44);--glass:rgba(255,255,255,.05);
+  --glb:rgba(255,255,255,.1);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --script:'Pinyon Script',cursive;
+  --sans:'Lato',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,.68,0,1.18);
+  --smooth:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--blk);
+  color:var(--cream);
+  font-family:var(--sans);
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+button{cursor:pointer;border:none;background:none;color:inherit;font-family:inherit}
+
+/* ── canvas ── */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── reveal ── */
+.fade{opacity:0;transform:translateY(26px);transition:opacity .85s var(--smooth),transform .85s var(--smooth);transition-delay:var(--d,0s)}
+.fade.in{opacity:1;transform:translateY(0)}
+
+/* ════════════ OPENING ════════════ */
+#opening{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;z-index:10;overflow:hidden;
+  background:radial-gradient(ellipse at 60% 30%,rgba(200,162,100,.09) 0%,transparent 60%),
+             radial-gradient(ellipse at 20% 80%,rgba(80,60,200,.06) 0%,transparent 50%),
+             var(--blk);
+}
+#opening.out{animation:fadeOut .9s var(--smooth) forwards;pointer-events:none}
+@keyframes fadeOut{to{opacity:0}}
+
+.shoot-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.ss{position:absolute;width:1px;border-radius:1px;opacity:0;
+    background:linear-gradient(to bottom,var(--gold),transparent);
+    animation:shoot linear infinite}
+.ss:nth-child(1){height:80px;top:5%;left:13%;animation-duration:5s;animation-delay:.3s}
+.ss:nth-child(2){height:55px;top:20%;left:57%;animation-duration:4.4s;animation-delay:1.9s}
+.ss:nth-child(3){height:72px;top:8%;left:79%;animation-duration:6s;animation-delay:3.4s}
+.ss:nth-child(4){height:44px;top:44%;left:35%;animation-duration:3.7s;animation-delay:5.1s}
+@keyframes shoot{
+  0%{opacity:0;transform:rotate(30deg) translateY(-60px)}
+  8%{opacity:1}80%{opacity:.8}
+  100%{opacity:0;transform:rotate(30deg) translateY(300px)}
+}
+
+.op-inner{
+  display:flex;flex-direction:column;align-items:center;gap:19px;
+  padding:0 28px;position:relative;z-index:2;
+  animation:openUp 2s var(--smooth) both;
+}
+@keyframes openUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.op-eye{font-size:.63rem;letter-spacing:.38em;text-transform:lowercase;color:var(--gold);opacity:.82}
+.op-name{font-family:var(--script);font-size:clamp(3.8rem,14vw,7.5rem);color:var(--cream);line-height:1;text-transform:lowercase;}
+.op-div{display:flex;align-items:center;gap:13px;width:200px}
+.op-div span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.op-div em{color:var(--gold);font-style:normal;font-size:.82rem}
+.op-sub{font-family:var(--serif);font-size:clamp(1.2rem,4.8vw,1.7rem);font-style:italic;color:var(--cream);text-transform:lowercase;}
+.op-tag{font-family:var(--serif);font-style:italic;font-size:clamp(.87rem,3.3vw,.97rem);color:var(--muted);max-width:320px;text-align:center;line-height:1.76;text-transform:lowercase;}
+.op-hint{font-size:.6rem;letter-spacing:.22em;text-transform:lowercase;color:var(--muted);opacity:.42}
+
+.enter-btn{
+  position:relative;width:76px;height:76px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;margin-top:8px;
+}
+.eb-t{font-size:.67rem;letter-spacing:.22em;text-transform:lowercase;color:var(--gold2);position:relative;z-index:2}
+.eb-r{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(200,162,100,.4);animation:rp 2.5s ease infinite}
+.eb-r2{animation-delay:-1.25s;border-color:rgba(200,162,100,.2)}
+@keyframes rp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.5}}
+
+/* ── nav ── */
+#nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:80;
+  display:flex;justify-content:center;flex-wrap:nowrap;
+  padding:9px 6px max(13px,env(safe-area-inset-bottom));
+  background:rgba(3,3,10,.9);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid rgba(200,162,100,.12);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+#nav::-webkit-scrollbar{display:none}
+.ni{
+  flex-shrink:0;font-size:.58rem;letter-spacing:.16em;
+  text-transform:lowercase;color:var(--muted);
+  padding:5px 11px;border-radius:2px;
+  transition:color .28s,background .28s;white-space:nowrap;
+}
+.ni.on,.ni:hover{color:var(--gold2);background:rgba(200,162,100,.08)}
+
+/* ── chapters ── */
+.ch{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:90px 22px 110px;z-index:1;
+}
+.ch-dk{background:linear-gradient(180deg,var(--deep),var(--navy))}
+.ch-bday{background:linear-gradient(180deg,var(--navy),var(--blk))}
+
+.ch-hd{text-align:center;margin-bottom:50px;max-width:580px;width:100%}
+.ch-n{display:block;font-size:.59rem;letter-spacing:.5em;text-transform:lowercase;color:var(--gold);opacity:.58;margin-bottom:13px}
+.ch-hd h2{font-family:var(--serif);font-size:clamp(2rem,8.5vw,3.7rem);font-weight:300;line-height:1.12;color:var(--cream);margin-bottom:15px;text-transform:lowercase;}
+.ch-hd h2 em{font-style:italic;color:var(--gold2)}
+.ch-hd p{font-family:var(--serif);font-style:italic;font-size:clamp(.92rem,3.3vw,1.05rem);color:var(--muted);line-height:1.76;text-transform:lowercase;}
+.cq{
+  margin-top:56px;max-width:480px;text-align:center;padding:20px 18px;
+  border-top:1px solid rgba(200,162,100,.17);border-bottom:1px solid rgba(200,162,100,.17);
+  font-family:var(--serif);font-style:italic;font-size:clamp(.92rem,3.3vw,1.06rem);color:var(--muted);line-height:1.8;text-transform:lowercase;}
+
+/* ── s1 gallery ── */
+.gallery{display:grid;grid-template-columns:1fr;gap:21px;width:100%;max-width:660px}
+@media(min-width:560px){.gallery{grid-template-columns:1fr 1fr}}
+.gc{
+  border-radius:20px;overflow:hidden;
+  background:var(--glass);border:1px solid var(--glb);
+  transition:transform .44s var(--ease),box-shadow .44s;
+}
+.gc:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.44)}
+.gp{
+  aspect-ratio:3/4;background-size:cover;background-position:center top;
+  background-color:rgba(255,255,255,.025);position:relative;
+}
+.gp::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(3,3,10,.5))}
+.gi{padding:20px}
+.gy{display:block;font-size:.56rem;letter-spacing:.3em;text-transform:lowercase;color:var(--gold);opacity:.7;margin-bottom:7px}
+.gi h3{font-family:var(--serif);font-size:1.27rem;font-weight:400;color:var(--cream);margin-bottom:7px;text-transform:lowercase;}
+.gi p{font-family:var(--serif);font-style:italic;font-size:.89rem;color:var(--muted);line-height:1.73;text-transform:lowercase;}
+
+/* ── s2 flip cards ── */
+.flip-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:680px}
+@media(min-width:480px){.flip-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){.flip-grid{grid-template-columns:repeat(4,1fr)}}
+.fc{aspect-ratio:1;perspective:800px;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;border:none;background:none;padding:0}
+.fi{
+  position:relative;width:100%;height:100%;transform-style:preserve-3d;
+  transition:transform .76s cubic-bezier(.4,0,.2,1);border-radius:14px;
+}
+.fc.flip .fi{transform:rotateY(180deg)}
+.ff,.fb{
+  position:absolute;inset:0;border-radius:14px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:13px;text-align:center;
+  background:var(--glass);border:1px solid var(--glb);
+}
+.fb{transform:rotateY(180deg);background:rgba(200,162,100,.06);border-color:rgba(200,162,100,.22)}
+.ff span{font-size:1.82rem;display:block;margin-bottom:9px}
+.ff p{font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--muted);text-transform:lowercase;}
+.fb p{font-family:var(--serif);font-style:italic;font-size:.78rem;color:var(--cream);line-height:1.62;text-transform:lowercase;}
+
+/* ── s3 proof ── */
+.proof-list{width:100%;max-width:630px;display:flex;flex-direction:column}
+.pi{display:grid;grid-template-columns:44px 1fr;gap:17px;padding:25px 0;border-bottom:1px solid rgba(200,162,100,.11);align-items:start}
+.pi:first-child{border-top:1px solid rgba(200,162,100,.11)}
+.pn{font-family:var(--serif);font-size:1.72rem;font-style:italic;color:var(--gold);opacity:.3;line-height:1;padding-top:3px}
+.pc h3{font-family:var(--serif);font-size:1.17rem;font-weight:400;color:var(--cream);margin-bottom:7px;text-transform:lowercase;}
+.pc p{font-family:var(--serif);font-style:italic;font-size:.89rem;color:var(--muted);line-height:1.73;text-transform:lowercase;}
+
+/* ── s4 never change ── */
+.nc-grid{display:grid;grid-template-columns:1fr;gap:13px;width:100%;max-width:680px}
+@media(min-width:480px){.nc-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:700px){.nc-grid{grid-template-columns:1fr 1fr 1fr}}
+.nc{padding:23px 20px;border-radius:20px;background:var(--glass);border:1px solid var(--glb);transition:transform .4s var(--ease)}
+.nc:hover{transform:translateY(-4px)}
+.nc-ic{font-size:1.52rem;display:block;margin-bottom:12px}
+.nc h3{font-family:var(--serif);font-size:1.07rem;font-weight:400;color:var(--cream);margin-bottom:7px;text-transform:lowercase;}
+.nc p{font-family:var(--serif);font-style:italic;font-size:.86rem;color:var(--muted);line-height:1.7;text-transform:lowercase;}
+
+/* ── s6 envelopes ── */
+.env-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:660px;margin:0 auto;}
+@media(min-width:580px){.env-grid{grid-template-columns:repeat(3,1fr)}}
+.ew{perspective:600px}
+.env{
+  position:relative;width:100%;aspect-ratio:3/2;border-radius:4px;overflow:hidden;
+  background:linear-gradient(148deg,#17132a,#100d1e);border:1px solid rgba(200,162,100,.18);
+  display:flex;flex-direction:column;cursor:pointer;width:100%;
+  transition:transform .44s var(--ease),box-shadow .44s;
+  -webkit-tap-highlight-color:transparent;padding:0;
+}
+.env:hover{transform:translateY(-5px) rotateX(5deg);box-shadow:0 22px 50px rgba(0,0,0,.54)}
+.ef{
+  position:absolute;top:0;left:0;right:0;height:52%;
+  background:linear-gradient(158deg,#1e1932,#150f26);
+  clip-path:polygon(0 0,100% 0,50% 100%);border-bottom:1px solid rgba(200,162,100,.1);
+  transform-origin:top center;transition:transform .54s var(--ease);
+}
+.env:hover .ef{transform:rotateX(-30deg)}
+.eb2{
+  position:relative;z-index:2;flex:1;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding:13px 9px;text-align:center;
+}
+.ewax{color:var(--gold);font-size:1.04rem;margin-bottom:5px;display:block}
+.etitle{font-family:var(--serif);font-size:clamp(.69rem,2.5vw,.86rem);color:var(--cream);line-height:1.32;margin-bottom:3px;text-transform:lowercase;}
+.esub{font-size:.58rem;font-style:italic;color:var(--muted);letter-spacing:.05em;text-transform:lowercase;}
+
+/* modal system */
+.modal-ov{
+  position:fixed;inset:0;z-index:160;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(3,3,10,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;pointer-events:none;transition:opacity .44s var(--smooth);
+  padding:20px;
+}
+.modal-ov.on {opacity:1;pointer-events:all}
+
+.letter-paper{
+  background:#f8f2e6;color:#27200e;border-radius:3px;
+  padding:42px 28px 38px;max-width:490px;width:100%;position:relative;
+  box-shadow:0 40px 90px rgba(0,0,0,.65);
+  transform:scale(.93) translateY(20px);
+  transition:transform .54s var(--ease);
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(0,0,0,.03) 28px);
+  max-height:80vh;overflow-y:auto;
+}
+.modal-ov.on .letter-paper{transform:scale(1) translateY(0)}
+.lc{position:absolute;top:15px;right:18px;color:rgba(39,32,14,.36);font-size:1.1rem;transition:color .2s;background:none;border:none;}
+.lc:hover{color:rgba(39,32,14,.7)}
+.lt{text-align:center;font-size:.64rem;letter-spacing:.3em;color:#c8a264;margin-bottom:11px}
+.lh{font-family:var(--serif);font-size:1.38rem;font-weight:400;color:#27200e;text-align:center;margin-bottom:11px;text-transform:lowercase;}
+.lr{width:46px;height:1px;background:rgba(200,162,100,.44);margin:0 auto 19px}
+.lb{font-family:var(--serif);font-size:1rem;line-height:1.92;color:#3a2e14;text-transform:lowercase;}
+.lb p{margin-bottom:15px}
+.lsig{font-family:var(--serif);font-size:1rem;text-align:right;color:#27200e;margin-top:22px;padding-top:15px;border-top:1px solid rgba(39,32,14,.12);text-transform:lowercase;}
+.lsig em{font-size:1.1rem;color:#8a6610}
+
+/* ── s7 birthday ── */
+.bday-inner{display:flex;flex-direction:column;align-items:center;gap:44px;width:100%;max-width:680px}
+.bday-photos{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:9px;width:100%;align-items:center}
+.bp{border-radius:14px;background-size:cover;background-position:center;background-color:rgba(255,255,255,.025);border:1px solid rgba(200,162,100,.1)}
+.bp-a{aspect-ratio:2/3;background-position:center top}
+.bp-b{aspect-ratio:2/3.6}
+.bp-c{aspect-ratio:2/3}
+.bday-text{text-align:center;width:100%}
+.bey{display:block;font-size:.59rem;letter-spacing:.42em;text-transform:lowercase;color:var(--gold);margin-bottom:13px}
+.bname{font-family:var(--script);font-size:clamp(3.5rem,13vw,6.5rem);color:var(--cream);line-height:1;margin-bottom:3px;text-transform:lowercase;}
+.brule{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:24px auto}
+.bletter{
+  text-align:left;font-family:var(--serif);
+  font-size:clamp(.98rem,3.4vw,1.08rem);color:var(--cream);
+  line-height:1.9;max-width:620px;margin:0 auto;text-transform:lowercase;
+}
+.bletter p{margin-bottom:20px;opacity:0.95}
+.bfinal{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1rem,3.6vw,1.18rem);color:var(--gold2);
+  padding:18px 20px;border-left:2px solid var(--gold);
+  text-align:left;margin:28px 0;line-height:1.8;text-transform:lowercase;
+}
+.bfrom{font-family:var(--serif);font-size:1.05rem;color:var(--muted);line-height:1.8;text-align:right;margin-top:25px;text-transform:lowercase;}
+.bfrom em{color:var(--gold2);font-size:1.15rem;font-style:normal}
+.cbtn{
+  display:inline-block;margin-top:35px;padding:15px 38px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--blk);font-size:.76rem;letter-spacing:.16em;text-transform:lowercase;
+  border-radius:2px;transition:transform .3s var(--ease),box-shadow .3s;
+}
+.cbtn:hover{transform:scale(1.04);box-shadow:0 12px 40px rgba(200,162,100,.28)}
+#conf{position:fixed;inset:0;pointer-events:none;z-index:240;overflow:hidden}
+.cp{position:absolute;top:-14px;animation:fall linear forwards}
+@keyframes fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(800deg);opacity:0}}
+
+/* audio engine floating interface */
+.mBtn{
+  position:fixed;bottom:70px;right:17px;z-index:85;
+  width:43px;height:43px;border-radius:50%;
+  border:1px solid rgba(200,162,100,.35);color:var(--gold);font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(3,3,10,.78);backdrop-filter:blur(10px);
+  transition:transform .3s,border-color .3s;
+}
+.mBtn:hover{transform:scale(1.1);border-color:var(--gold)}
+.mBtn.on{color:var(--gold2);border-color:var(--gold);background:rgba(200,162,100,.12)}
+</style>
 </head>
 <body>
 
-<!--
-════════════════════════════════════════════════════════════════
-  THE GIRL BEHIND THE SMILE
-  ── SETUP GUIDE FOR NON-CODERS ──────────────────────────────
+<canvas id="bg"></canvas>
 
-  HOW TO ADD PHOTOS:
-  ─────────────────
-  1. Put all your image files in the same folder as index.html
-  2. Name them exactly as shown in the comments (e.g. "childhood1.jpg")
-  3. Supported formats: .jpg  .jpeg  .png  .webp
-  4. Tip: resize photos to max 1200px wide to keep the site fast
-
-  HOW TO ADD MUSIC:
-  ─────────────────
-  1. Put your .mp3 file in the same folder as index.html
-  2. Name it exactly: song.mp3
-  3. It will play (with user permission) in the Birthday section
-
-  HOW TO CHANGE TEXT:
-  ───────────────────
-  Search for the comment:  ✏️ EDIT:
-  Everything immediately below that comment is text you should replace.
-  Replace the placeholder text with your own words.
-
-  HOW TO ADD MORE STARS:
-  ──────────────────────
-  Open script.js and find the section labelled:
-    ★ STARS DATA — ADD YOUR OWN STARS HERE ★
-  Copy any existing star object and paste it below, then change
-  the title and text fields.
-
-  HOW TO ADD MORE LETTERS:
-  ────────────────────────
-  Open script.js and find the section labelled:
-    ✉ LETTERS DATA — EDIT YOUR LETTERS HERE ✉
-  Copy any existing letter object and paste it below.
-  In index.html, copy any envelope button and give it a matching data-letter value.
-
-════════════════════════════════════════════════════════════════
--->
-
-<!-- Global starfield canvas (always visible behind everything) -->
-<canvas id="starfield"></canvas>
-
-<!-- Cursor glow -->
-<div id="cursorGlow"></div>
-
-<!-- ════════════════════════════════════════════════════════════
-     OPENING / HERO SCREEN
-════════════════════════════════════════════════════════════ -->
-<section id="opening">
-  <div class="shooting-stars">
-    <span></span><span></span><span></span><span></span>
+<div id="opening">
+  <div class="shoot-wrap">
+    <span class="ss"></span><span class="ss"></span>
+    <span class="ss"></span><span class="ss"></span>
   </div>
-
-  <div class="opening-inner">
-    <p class="pre-title">a birthday gift, crafted with everything</p>
-
-    <!-- ✏️ EDIT: Change her name below -->
-    <h1 class="hero-name">her name</h1>
-
-    <div class="hero-divider">
-      <span class="hero-line"></span>
-      <span class="hero-glyph">✦</span>
-      <span class="hero-line"></span>
-    </div>
-
-    <p class="hero-subtitle">the girl behind the smile</p>
-
-    <!-- ✏️ EDIT: A one-sentence description of who she is to you -->
-    <p class="hero-desc">the one who changed the temperature of the room just by existing in it</p>
-
-    <button id="enterBtn" class="enter-btn">
-      <span class="enter-label">enter</span>
-      <span class="enter-ring"></span>
+  <div class="op-inner">
+    <p class="op-eye">a birthday gift &nbsp;✦&nbsp; made with everything</p>
+    <h1 class="op-name">faryal dawood</h1>
+    <div class="op-div"><span></span><em>✦</em><span></span></div>
+    <p class="op-sub">the girl behind the smile</p>
+    <p class="op-tag">the one who turned ordinary days into something i actually want to remember</p>
+    <button id="enterBtn" class="enter-btn" type="button">
+      <span class="eb-t">enter</span>
+      <span class="eb-r"></span>
+      <span class="eb-r eb-r2"></span>
     </button>
+    <p class="op-hint">tap to open</p>
   </div>
+</div>
 
-  <!-- Decorative floating orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-</section>
+<div id="site" style="display:none">
 
-<!-- ════════════════════════════════════════════════════════════
-     SITE BODY (hidden until Enter is pressed)
-════════════════════════════════════════════════════════════ -->
-<div id="siteBody" class="site-hidden">
-
-  <!-- Sticky navigation -->
-  <nav id="siteNav">
-    <button class="nav-item active" data-target="s1">before you</button>
-    <button class="nav-item" data-target="s2">don't see</button>
-    <button class="nav-item" data-target="s3">proof</button>
-    <button class="nav-item" data-target="s4">never change</button>
-    <button class="nav-item" data-target="s5">stars</button>
-    <button class="nav-item" data-target="s6">letters</button>
-    <button class="nav-item" data-target="s7">birthday</button>
+  <nav id="nav">
+    <button class="ni" data-t="s1" type="button">before you</button>
+    <button class="ni" data-t="s2" type="button">don't see</button>
+    <button class="ni" data-t="s3" type="button">proof</button>
+    <button class="ni" data-t="s4" type="button">never change</button>
+    <button class="ni" data-t="s6" type="button">letters</button>
+    <button class="ni" data-t="s7" type="button">birthday</button>
   </nav>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 1 · BEFORE I MET YOU
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter" id="s1">
-    <div class="chapter-head reveal">
-      <span class="ch-num">01</span>
+  <section id="s1" class="ch">
+    <header class="ch-hd fade">
+      <span class="ch-n">01</span>
       <h2>before<br><em>i met you</em></h2>
-      <!-- ✏️ EDIT: Intro paragraph for this section -->
-      <p class="ch-intro">The story of you didn't start when I showed up. It started long before — in chapters I wasn't there to see, but that shaped every single thing I love about you.</p>
+      <p>her story didn't start when i arrived. it started years earlier, in chapters i never got to witness. chapters that quietly built the person i can't imagine living without.</p>
+    </header>
+    <div class="gallery">
+      <article class="gc fade" style="--d:.05s">
+        <div class="gp" style="background-image:url('childhood2.jpg')"></div>
+        <div class="gi">
+          <span class="gy">— the school years —</span>
+          <h3>before she knew the world was watching</h3>
+          <p>look at her. small and certain, that huge smile filling the whole frame. she already had that thing, that warmth, that completely unguarded joy, even then. before she had any idea what the world would ask of her, she showed up like she already belonged.</p>
+        </div>
+      </article>
+      <article class="gc fade" style="--d:.12s">
+        <div class="gp" style="background-image:url('childhood1.jpg')"></div>
+        <div class="gi">
+          <span class="gy">— the very beginning —</span>
+          <h3>the girl with the red bag</h3>
+          <p>there is something about this photo that feels like looking at a secret. a version of her that existed before i had the privilege of knowing her. looking sideways at something, already curious, already someone worth knowing.</p>
+        </div>
+      </article>
+      <article class="gc fade" style="--d:.19s">
+        <div class="gp" style="background-image:url('childhood3.jpg')"></div>
+        <div class="gi">
+          <span class="gy">— growing up —</span>
+          <h3>all white, all her</h3>
+          <p>she shaded her eyes from the sun like she was already looking for something. i like to think it was the future. i like to think, in some version of the universe, she was already looking toward where we'd end up.</p>
+        </div>
+      </article>
+      <article class="gc fade" style="--d:.26s">
+        <div class="gp" style="background-image:url('bday4.jpg')"></div>
+        <div class="gi">
+          <span class="gy">— becoming —</span>
+          <h3>the balaclava era</h3>
+          <p>she put a filter over her face and thought she was hiding. she wasn't. those eyes gave everything away. they always do. no filter in the world is going to make her less readable to someone who has been paying attention.</p>
+        </div>
+      </article>
     </div>
-
-    <div class="before-grid">
-
-      <!--
-        PHOTO CARD 1
-        📷 IMAGE: Place a file named  childhood1.jpg  in the same folder as index.html
-        ✏️ EDIT: Change the year, caption, and paragraph below
-      -->
-      <article class="before-card reveal" style="--delay:0s">
-        <div class="bc-photo" style="background-image:url('childhood1.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>childhood1.jpg</small></div>
-        </div>
-        <div class="bc-info">
-          <span class="bc-year">— the beginning —</span>
-          <h3>her title here</h3>
-          <!-- ✏️ EDIT: Write about her childhood or early years here -->
-          <p>Write about something from her early life — a memory, a trait she always had, something she probably doesn't remember but someone told you about. Make it feel like you really know her history.</p>
-        </div>
-      </article>
-
-      <!--
-        PHOTO CARD 2
-        📷 IMAGE: Place a file named  childhood2.jpg  in the same folder as index.html
-        ✏️ EDIT: Change the year, caption, and paragraph below
-      -->
-      <article class="before-card reveal" style="--delay:.1s">
-        <div class="bc-photo" style="background-image:url('childhood2.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>childhood2.jpg</small></div>
-        </div>
-        <div class="bc-info">
-          <span class="bc-year">— growing up —</span>
-          <h3>her title here</h3>
-          <!-- ✏️ EDIT: Write about her growing-up years, her dreams, her personality back then -->
-          <p>What was she like as she grew? What dreams did she carry? Write about the version of her that existed before anyone was paying close enough attention.</p>
-        </div>
-      </article>
-
-      <!--
-        PHOTO CARD 3
-        📷 IMAGE: Place a file named  childhood3.jpg  in the same folder as index.html
-        ✏️ EDIT: Change the year, caption, and paragraph below
-      -->
-      <article class="before-card reveal" style="--delay:.2s">
-        <div class="bc-photo" style="background-image:url('childhood3.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>childhood3.jpg</small></div>
-        </div>
-        <div class="bc-info">
-          <span class="bc-year">— becoming —</span>
-          <h3>her title here</h3>
-          <!-- ✏️ EDIT: Write about who she was becoming, a turning point or milestone -->
-          <p>Describe a chapter of her life — something that shaped her or tested her. Something she came out of differently than she went in. Something that became part of who she is now.</p>
-        </div>
-      </article>
-
-      <!--
-        PHOTO CARD 4
-        📷 IMAGE: Place a file named  childhood4.jpg  in the same folder as index.html
-        ✏️ EDIT: Change the year, caption, and paragraph below
-      -->
-      <article class="before-card reveal" style="--delay:.3s">
-        <div class="bc-photo" style="background-image:url('childhood4.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>childhood4.jpg</small></div>
-        </div>
-        <div class="bc-info">
-          <span class="bc-year">— just before —</span>
-          <h3>her title here</h3>
-          <!-- ✏️ EDIT: Write about the version of her right before your paths crossed -->
-          <p>What was she doing the year before you met? Who was she the day before everything shifted? This is her story — tell it with the love it deserves.</p>
-        </div>
-      </article>
-
-    </div>
-
-    <blockquote class="chapter-quote reveal">
-      <!-- ✏️ EDIT: A poetic line that summarises her "before" story -->
-      "every chapter she lived without me was quietly writing the person i'd fall for."
-    </blockquote>
+    <blockquote class="cq fade" style="--d:.1s">“every year she lived before i knew her was quietly writing the person i would completely fall for.”</blockquote>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 2 · THINGS YOU DON'T REALISE ABOUT YOURSELF
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter chapter-dark" id="s2">
-    <div class="chapter-head reveal">
-      <span class="ch-num">02</span>
+  <section id="s2" class="ch ch-dk">
+    <header class="ch-hd fade">
+      <span class="ch-n">02</span>
       <h2>things you don't<br><em>realise about yourself</em></h2>
-      <!-- ✏️ EDIT: Intro sentence for this section -->
-      <p class="ch-intro">The things she's blind to. The truths she needs to hear. Tap each card to open it.</p>
-    </div>
-
+      <p>the truths she carries without knowing. tap each card.</p>
+    </header>
     <div class="flip-grid">
-
-      <!--
-        COMPLIMENT CARDS — tap to flip
-        ✏️ EDIT: Change the icon, front label, and back paragraph for each card
-        Add more cards by copying this block
-      -->
-
-      <div class="flip-card reveal" style="--delay:0s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">✨</span>
-            <!-- ✏️ EDIT: Front label (short — 2–4 words) -->
-            <p>her light</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT: The truth she needs to hear about this quality -->
-            <p>You walk into a room and something shifts. You don't feel it — but everyone else does. That's not a coincidence. That's you, every single time.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.08s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">🌙</span>
-            <!-- ✏️ EDIT -->
-            <p>her mind</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>The way she thinks — really thinks — is rare. She goes to places most minds don't even try to visit. She notices things. She asks better questions. That's a gift.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.16s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">🌸</span>
-            <!-- ✏️ EDIT -->
-            <p>her kindness</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>She cares in the way she doesn't talk about — checking in, remembering, showing up quietly. That kind of love doesn't announce itself. It just proves itself, again and again.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.24s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">💫</span>
-            <!-- ✏️ EDIT -->
-            <p>her strength</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>She has been through things that would've broken someone less made. She came out softer, not harder. That is not a small thing. That is one of the bravest things a person can do.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.32s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">🌹</span>
-            <!-- ✏️ EDIT -->
-            <p>her beauty</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>She is most beautiful in the unplanned moments. Mid-laugh. Half-asleep. Lost in thought. When she has no idea anyone is watching. Especially then.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.4s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">🦋</span>
-            <!-- ✏️ EDIT -->
-            <p>her laugh</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>Her real laugh — the loud one she tries to suppress — is one of the greatest sounds in the world. I would embarrass myself completely, on purpose, just to hear it again.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.48s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">💎</span>
-            <!-- ✏️ EDIT -->
-            <p>her worth</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>She deserves every good thing — not because she's perfect, but because she keeps trying. Quietly. Without applause. Without needing anyone to notice. That's rare. That's worth everything.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal" style="--delay:.56s" tabindex="0">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="flip-icon">⭐</span>
-            <!-- ✏️ EDIT -->
-            <p>her effect</p>
-          </div>
-          <div class="flip-back">
-            <!-- ✏️ EDIT -->
-            <p>She doesn't realise how much space she takes up in the people who love her. Not in a demanding way — in the way a song gets stuck in your head and you don't mind at all.</p>
-          </div>
-        </div>
-      </div>
-
+      <button class="fc fade" style="--d:0s" type="button"><div class="fi"><div class="ff"><span>✨</span><p>her light</p></div><div class="fb"><p>she walks into a room and something shifts. she doesn't feel it, but everyone around her does. every single time. that's not luck. that's her.</p></div></div></button>
+      <button class="fc fade" style="--d:.07s" type="button"><div class="fi"><div class="ff"><span>🌙</span><p>her mind</p></div><div class="fb"><p>the way she thinks is genuinely rare. she notices things. she asks the questions most people are too scared to ask. i could listen to her process the world for hours.</p></div></div></button>
+      <button class="fc fade" style="--d:.14s" type="button"><div class="fi"><div class="ff"><span>🌸</span><p>her care</p></div><div class="fb"><p>she remembers the small things. the things people mention once and forget they said. she holds onto them. she shows up without being asked. that kind of love is rare.</p></div></div></button>
+      <button class="fc fade" style="--d:.21s" type="button"><div class="fi"><div class="ff"><span>💫</span><p>her strength</p></div><div class="fb"><p>she has been through things that would have made someone else bitter. she came out softer. that's not just strength, that's one of the most extraordinary things a person can do.</p></div></div></button>
+      <button class="fc fade" style="--d:.28s" type="button"><div class="fi"><div class="ff"><span>🌹</span><p>her beauty</p></div><div class="fb"><p>she is most beautiful when she has no idea anyone is looking. mid-laugh. half-asleep. lost in a thought she hasn't shared yet. those are the versions of her i keep.</p></div></div></button>
+      <button class="fc fade" style="--d:.35s" type="button"><div class="fi"><div class="ff"><span>🦋</span><p>her laugh</p></div><div class="fb"><p>her real laugh, the loud one, the uncontrollable one she tries to hide, is genuinely one of the best sounds i have ever heard. i collect the things that cause it.</p></div></div></button>
+      <button class="fc fade" style="--d:.42s" type="button"><div class="fi"><div class="ff"><span>💎</span><p>her worth</p></div><div class="fb"><p>she deserves every good thing. not in an abstract way. in a specific, earned, i-have-watched-her-try way. the world is genuinely better because she is in it.</p></div></div></button>
+      <button class="fc fade" style="--d:.49s" type="button"><div class="fi"><div class="ff"><span>⭐</span><p>her effect</p></div><div class="fb"><p>she doesn't realise how much space she takes up in the people who love her. not in a demanding way. in the way a good song does, you don't mind at all that it's stuck in your head.</p></div></div></button>
     </div>
-
-    <blockquote class="chapter-quote reveal">
-      <!-- ✏️ EDIT -->
-      "she is a collection of beautiful things she has never allowed herself to fully see."
-    </blockquote>
+    <blockquote class="cq fade" style="--d:.1s">“she is a collection of beautiful things she has never once allowed herself to fully see.”</blockquote>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 3 · PROOF THAT YOU MATTER
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter" id="s3">
-    <div class="chapter-head reveal">
-      <span class="ch-num">03</span>
+  <section id="s3" class="ch">
+    <header class="ch-hd fade">
+      <span class="ch-n">03</span>
       <h2>proof that<br><em>you matter</em></h2>
-      <!-- ✏️ EDIT: Intro sentence for this section -->
-      <p class="ch-intro">She has probably never sat down and counted the lives she's quietly made better. So I did it for her.</p>
-    </div>
-
+      <p>she has probably never sat down and counted the ways she has quietly made things better. so i did it for her.</p>
+    </header>
     <div class="proof-list">
-
-      <!--
-        PROOF ITEMS — concrete examples of how she has impacted people
-        ✏️ EDIT: Replace each proof item with a real example from her life
-        Add more by copying a .proof-item block
-      -->
-
-      <div class="proof-item reveal" style="--delay:0s">
-        <span class="proof-glyph">01</span>
-        <div class="proof-content">
-          <!-- ✏️ EDIT: A specific way she made someone's life better -->
-          <h3>she stayed</h3>
-          <p>Write about a time she showed up for someone who needed her — even when it was inconvenient, even when she had nothing left to give. The people who stay are rare. She's one of them.</p>
-        </div>
-      </div>
-
-      <div class="proof-item reveal" style="--delay:.1s">
-        <span class="proof-glyph">02</span>
-        <div class="proof-content">
-          <!-- ✏️ EDIT -->
-          <h3>she listened</h3>
-          <p>Write about a time she truly listened to someone. Not waiting to talk — actually listening. The kind that makes you feel like the most important person in the room. She does that without trying.</p>
-        </div>
-      </div>
-
-      <div class="proof-item reveal" style="--delay:.2s">
-        <span class="proof-glyph">03</span>
-        <div class="proof-content">
-          <!-- ✏️ EDIT -->
-          <h3>she remembered</h3>
-          <p>Write about a time she remembered something small — a detail, a date, a preference — that someone mentioned once, in passing. That kind of attention tells someone they matter. She gave that freely.</p>
-        </div>
-      </div>
-
-      <div class="proof-item reveal" style="--delay:.3s">
-        <span class="proof-glyph">04</span>
-        <div class="proof-content">
-          <!-- ✏️ EDIT -->
-          <h3>she changed something in me</h3>
-          <p>Write about a specific way she made you better — a habit, a perspective, a version of yourself you didn't know existed before you knew her. Be specific. Be honest. Tell her exactly what she moved in you.</p>
-        </div>
-      </div>
-
-      <div class="proof-item reveal" style="--delay:.4s">
-        <span class="proof-glyph">05</span>
-        <div class="proof-content">
-          <!-- ✏️ EDIT -->
-          <h3>she made it easier</h3>
-          <p>Write about a time her presence — even without doing anything specific — just made something harder feel lighter. That's an underrated gift. Not everyone has it. She does.</p>
-        </div>
-      </div>
-
+      <div class="pi fade" style="--d:0s"><span class="pn">01</span><div class="pc"><h3>she makes people feel less alone</h3><p>there is something specific about being around her. you don't have to explain yourself as much. you don't have to earn your place in the conversation. she just makes room, without fanfare, without condition, and most people don't realise how rare that is until it's gone.</p></div></div>
+      <div class="pi fade" style="--d:.1s"><span class="pn">02</span><div class="pc"><h3>she changes the temperature of a room</h3><p>i have watched it happen. she arrives and something loosens. people laugh easier. conversations go deeper. it is not something she performs, it is just what she carries. i don't know if she knows she does it. she should.</p></div></div>
+      <div class="pi fade" style="--d:.2s"><span class="pn">03</span><div class="pc"><h3>she holds the things you say</h3><p>she listens like she's archiving. like she genuinely intends to carry what you've said. weeks later she'll come back to it unprompted, checking in, remembering something mentioned in passing. that kind of love is a love language most people can't even name.</p></div></div>
+      <div class="pi fade" style="--d:.3s"><span class="pn">04</span><div class="pc"><h3>she made me want to be better</h3><p>not because she asked me to. not because she said anything. just because knowing her set a standard, for gentleness, for honesty, for trying. she became the version of a person i wanted to be close enough to. that is the quietest and most powerful thing one person can do to another.</p></div></div>
+      <div class="pi fade" style="--d:.4s"><span class="pn">05</span><div class="pc"><h3>she carries more than she shows</h3><p>i have watched her deal with hard things without asking anyone to carry them with her. quietly. with more grace than the situation deserved. and still showed up soft for the people around her. that is not nothing. that is one of the bravest things i have ever seen.</p></div></div>
     </div>
-
-    <blockquote class="chapter-quote reveal">
-      <!-- ✏️ EDIT -->
-      "she has quietly, consistently, without asking for recognition, made the world better by being in it."
-    </blockquote>
+    <blockquote class="cq fade" style="--d:.1s">“she has, without asking for credit, without announcement, consistently made the world around her warmer.”</blockquote>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 4 · THINGS I HOPE NEVER CHANGE
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter chapter-dark" id="s4">
-    <div class="chapter-head reveal">
-      <span class="ch-num">04</span>
+  <section id="s4" class="ch ch-dk">
+    <header class="ch-hd fade">
+      <span class="ch-n">04</span>
       <h2>things i hope<br><em>never change</em></h2>
-      <!-- ✏️ EDIT: Intro sentence -->
-      <p class="ch-intro">The small things. The specific things. The things that are so completely her that the world would notice if they disappeared.</p>
+      <p>the small things. the specific things. the things that are so completely her that losing them would feel like losing something essential.</p>
+    </header>
+    <div class="nc-grid">
+      <div class="nc fade" style="--d:0s"><span class="nc-ic">🌙</span><h3>the way she laughs at her own jokes</h3><p>she starts laughing before she finishes the punchline. every time. she cannot help it. and it is the most genuinely infectious thing, the laugh is always better than the joke, and the joke is usually good.</p></div>
+      <div class="nc fade" style="--d:.09s"><span class="nc-ic">✨</span><h3>those eyes when she's hiding something</h3><p>she thinks she's being subtle. she is not. there is a very specific look she gets when she's deciding whether to say the thing or swallow it, and i have memorised every version of it.</p></div>
+      <div class="nc fade" style="--d:.18s"><span class="nc-ic">🌸</span><h3>the way she loves</h3><p>she loves in small, consistent ways that add up to something enormous. she doesn't announce it. she just does it. over and over. that kind of love doesn't shout. it builds.</p></div>
+      <div class="nc fade" style="--d:.27s"><span class="nc-ic">💫</span><h3>her stubbornness</h3><p>she will hold a position until someone gives her an actual reason to change it. not pressure. not guilt. a reason. i used to find it maddening. now i think it is one of the most principled things about her.</p></div>
+      <div class="nc fade" style="--d:.36s"><span class="nc-ic">🦋</span><h3>the overthinking she calls a flaw</h3><p>she feels everything so thoroughly. turns it over. examines it. cares about getting it right. she calls that a problem. i call it proof that she takes the world seriously. please never stop taking the world seriously.</p></div>
+      <div class="nc fade" style="--d:.45s"><span class="nc-ic">⭐</span><h3>the balaclava thing</h3><p>she covered her face with a filter and still managed to be the most recognisable person in the photo. those eyes. that pout. no amount of knitted fabric was ever going to be enough. i don't know why she tries.</p></div>
     </div>
-
-    <div class="never-grid">
-
-      <!--
-        "NEVER CHANGE" CARDS
-        ✏️ EDIT: Fill each card with a specific, personal detail about her
-        The more specific, the better — she should feel truly seen
-        Add more by copying a .nc-card block
-      -->
-
-      <div class="nc-card reveal" style="--delay:0s">
-        <span class="nc-icon">🌙</span>
-        <!-- ✏️ EDIT: Short label (2–4 words) -->
-        <h3>the way she laughs</h3>
-        <!-- ✏️ EDIT: Describe this specific thing about her in warm, specific detail -->
-        <p>Write about a specific habit or quirk — the way she laughs at her own jokes before finishing them, the way she gets animated when she talks about something she loves. Make it so specific she gasps when she reads it.</p>
-      </div>
-
-      <div class="nc-card reveal" style="--delay:.1s">
-        <span class="nc-icon">✨</span>
-        <!-- ✏️ EDIT -->
-        <h3>how she texts</h3>
-        <!-- ✏️ EDIT -->
-        <p>Write about something specific about her texting style, her voice notes, her reactions — a tiny digital quirk that is completely her. Something you'd recognise anywhere.</p>
-      </div>
-
-      <div class="nc-card reveal" style="--delay:.2s">
-        <span class="nc-icon">🌸</span>
-        <!-- ✏️ EDIT -->
-        <h3>the face she makes</h3>
-        <!-- ✏️ EDIT -->
-        <p>Describe a specific facial expression she makes — when she's trying not to laugh, when she's pretending to be annoyed, when something genuinely surprises her. She probably doesn't know she does it.</p>
-      </div>
-
-      <div class="nc-card reveal" style="--delay:.3s">
-        <span class="nc-icon">💫</span>
-        <!-- ✏️ EDIT -->
-        <h3>how she cares</h3>
-        <!-- ✏️ EDIT -->
-        <p>Write about a specific, small way she shows she cares — something she does without thinking, without credit, without announcement. The kind of love that only people paying close attention would ever even catch.</p>
-      </div>
-
-      <div class="nc-card reveal" style="--delay:.4s">
-        <span class="nc-icon">🦋</span>
-        <!-- ✏️ EDIT -->
-        <h3>her stubbornness</h3>
-        <!-- ✏️ EDIT -->
-        <p>Write about a quality that might look like a flaw from the outside — her stubbornness, her overthinking, her tendency to feel everything deeply — and explain why you hope she never loses it.</p>
-      </div>
-
-      <div class="nc-card reveal" style="--delay:.5s">
-        <span class="nc-icon">⭐</span>
-        <!-- ✏️ EDIT -->
-        <h3>the way she loves</h3>
-        <!-- ✏️ EDIT -->
-        <p>Describe her love style — the way she shows up, the way she expresses care, the way she makes people feel chosen. Be specific. Be vulnerable. Let her know you notice every single part of it.</p>
-      </div>
-
-    </div>
-
-    <blockquote class="chapter-quote reveal">
-      <!-- ✏️ EDIT -->
-      "i hope she stays exactly this unfinished, this real, this completely herself."
-    </blockquote>
+    <blockquote class="cq fade" style="--d:.1s">“i hope she stays exactly this unfinished, this real, this completely and entirely herself.”</blockquote>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 5 · THE STARS ROOM
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter chapter-stars" id="s5">
-    <div class="chapter-head chapter-head-overlay reveal">
-      <span class="ch-num">05</span>
-      <h2>the stars<br><em>room</em></h2>
-      <p class="ch-intro">Every star holds something. Tap one — let the sky speak.</p>
-    </div>
-
-    <!-- Interactive star canvas — populated by script.js -->
-    <canvas id="starRoom"></canvas>
-    <p class="stars-hint">✦ &nbsp; tap any star &nbsp; ✦</p>
-
-    <!-- Star modal -->
-    <div class="modal-overlay" id="starOverlay">
-      <div class="modal-box">
-        <button class="modal-close" id="starClose">✕</button>
-        <span class="modal-star-icon">✦</span>
-        <h3 id="starTitle"></h3>
-        <p id="starText"></p>
-      </div>
-    </div>
-  </section>
-
-<section class="chapter" id="s6" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 20px; box-sizing: border-box; overflow: hidden;">
+  <section id="s6" class="ch">
+    <header class="ch-hd fade">
+      <span class="ch-n">05</span>
+      <h2>letters for<br><em>difficult days</em></h2>
+      <p>written before the moments they're needed. open whichever one finds you.</p>
+    </header>
     
-    <div class="chapter-head reveal" style="margin-bottom: 15px; text-align: center;">
-      <span class="ch-num" style="display: block; font-size: 0.85rem; opacity: 0.5;">06</span>
-      <h2 style="font-size: 1.5rem; margin: 5px 0; text-transform: lowercase;">letters for<br><em>difficult days</em></h2>
-      <p class="ch-intro" style="font-size: 0.85rem; opacity: 0.7; margin: 0;">written for the moments before they arrive. open whichever one finds you.</p>
-    </div>
-
-    <div class="envelopes-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; width: 100%; max-width: 500px; margin: 0 auto; padding: 5px;">
-
-      <div class="env-wrap reveal" style="--delay:0s">
-        <button class="envelope" data-letter="sad">
-          <div class="env-flap"></div>
-          <div class="env-body">
-            <span class="env-wax">✦</span>
-            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you're sad</p>
-            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for the heavy days</p>
+    <div class="env-grid">
+      <div class="ew fade" style="--d:0s">
+        <button class="env" data-l="sad" type="button">
+          <div class="ef"></div>
+          <div class="eb2">
+            <span class="ewax">✦</span>
+            <p class="etitle">open when<br>you're sad</p>
+            <p class="esub">for heavy days</p>
           </div>
         </button>
       </div>
-
-      <div class="env-wrap reveal" style="--delay:.1s">
-        <button class="envelope" data-letter="overthinking">
-          <div class="env-flap"></div>
-          <div class="env-body">
-            <span class="env-wax">✦</span>
-            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you're overthinking</p>
-            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">when your mind won't stop</p>
+      <div class="ew fade" style="--d:.07s">
+        <button class="env" data-l="overthinking" type="button">
+          <div class="ef"></div>
+          <div class="eb2">
+            <span class="ewax">✦</span>
+            <p class="etitle">open when<br>overthinking</p>
+            <p class="esub">calm your mind</p>
           </div>
         </button>
       </div>
-
-      <div class="env-wrap reveal" style="--delay:.2s">
-        <button class="envelope" data-letter="insecure">
-          <div class="env-flap"></div>
-          <div class="env-body">
-            <span class="env-wax">✦</span>
-            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you feel insecure</p>
-            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">a reminder of who you are</p>
+      <div class="ew fade" style="--d:.14s">
+        <button class="env" data-l="insecure" type="button">
+          <div class="ef"></div>
+          <div class="eb2">
+            <span class="ewax">✦</span>
+            <p class="etitle">open when<br>insecure</p>
+            <p class="esub">who you are</p>
           </div>
         </button>
       </div>
-
-      <div class="env-wrap reveal" style="--delay:.3s">
-        <button class="envelope" data-letter="miss">
-          <div class="env-flap"></div>
-          <div class="env-body">
-            <span class="env-wax">✦</span>
-            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when<br>you miss me</p>
-            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for the quiet, lonely moments</p>
+      <div class="ew fade" style="--d:.21s">
+        <button class="env" data-l="miss" type="button">
+          <div class="ef"></div>
+          <div class="eb2">
+            <span class="ewax">✦</span>
+            <p class="etitle">open when<br>you miss me</p>
+            <p class="esub">quiet moments</p>
           </div>
         </button>
       </div>
-
-      <div class="env-wrap reveal" style="--delay:.4s">
-        <button class="envelope" data-letter="reminder">
-          <div class="env-flap"></div>
-          <div class="env-body">
-            <span class="env-wax">✦</span>
-            <p class="env-title" style="font-size: 0.85rem; text-transform: lowercase;">open when you need<br>a reminder</p>
-            <p class="env-sub" style="font-size: 0.7rem; opacity: 0.6; text-transform: lowercase;">for when you forget</p>
+      <div class="ew fade" style="--d:.28s">
+        <button class="env" data-l="reminder" type="button">
+          <div class="ef"></div>
+          <div class="eb2">
+            <span class="ewax">✦</span>
+            <p class="etitle">open when you<br>need a reminder</p>
+            <p class="esub">when you forget</p>
           </div>
         </button>
-      </div>
-
-    </div>
-
-    <div class="modal-overlay" id="letterOverlay">
-      <div class="letter-paper">
-        <button class="modal-close letter-close" id="letterClose">✕</button>
-        <div class="letter-top">✦ &nbsp; ✦ &nbsp; ✦</div>
-        <h3 id="letterHeading" class="letter-heading" style="text-transform: lowercase;"></h3>
-        <div class="letter-rule"></div>
-        <div id="letterBody" class="letter-body" style="text-transform: lowercase;"></div>
-        <p class="letter-sig" style="text-transform: lowercase;">with everything i have,<br><em>— your person</em></p>
       </div>
     </div>
   </section>
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 7 · BIRTHDAY FINALE
-  ══════════════════════════════════════════════════════ -->
-  <section class="chapter chapter-dark chapter-birthday" id="s7">
 
-    <!--
-      MUSIC
-      📷 AUDIO: Place a file named  song.mp3  in the same folder as index.html
-    -->
-    <audio id="bgMusic" loop preload="none">
-      <source src="song.mp3" type="audio/mpeg" />
-    </audio>
-    <button id="musicBtn" class="music-btn" title="toggle music" aria-label="Toggle music">♪</button>
-
+  <section id="s7" class="ch ch-bday">
     <div class="bday-inner">
-
-      <!-- Photo strip at top -->
-      <div class="bday-photos reveal">
-        <!--
-          BIRTHDAY PHOTOS
-          📷 IMAGE: Place files named  bday1.jpg  bday2.jpg  bday3.jpg  in the same folder
-          You can add or remove <div class="bday-photo"> items as needed
-        -->
-        <div class="bday-photo" style="background-image:url('bday1.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>bday1.jpg</small></div>
-        </div>
-        <div class="bday-photo bday-photo--tall" style="background-image:url('bday2.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>bday2.jpg</small></div>
-        </div>
-        <div class="bday-photo" style="background-image:url('bday3.jpg')">
-          <div class="bc-photo-fallback">📷<br><small>bday3.jpg</small></div>
-        </div>
+      <div class="bday-photos fade">
+        <div class="bp bp-a" style="background-image:url('bday2.jpg')"></div>
+        <div class="bp bp-b" style="background-image:url('bday1.jpg')"></div>
+        <div class="bp bp-c" style="background-image:url('bday3.jpg')"></div>
       </div>
+      <div class="bday-text fade" style="--d:.15s">
+        <span class="bey">happy birthday ✦ 2026</span>
+        <h2 class="bname">faryal dawood</h2>
+        
+        <div class="brule"></div>
+        
+        <div class="bletter">
+          <p>i don't have the right words. i never do when it comes to you. but i'm going to try anyway, because someone as special as you deserves more than a quick "happy birthday." you deserve to know how much light you bring into the lives around you, and how much brighter mine became the moment you walked into it.</p>
 
-      <div class="bday-text reveal">
-        <p class="bday-eyebrow">✦ &nbsp; happy birthday &nbsp; ✦</p>
+          <p>one thing i've never forgotten is the way you get excited when you're talking about something you genuinely care about. the way your messages suddenly get longer, the way you keep going even when you think you're talking too much, and the way i could sit there for hours just reading every word. i don't think you realize how beautiful that is. i don't think you realize how beautiful you are in those moments, when you're completely yourself and not trying to impress anyone.</p>
 
-        <!-- ✏️ EDIT: Faryal Dawood -->
-        <h2 class="bday-name">her name</h2>
+          <p>you've become such a huge part of my life that it's hard to remember what things felt like before you. somehow you've managed to make ordinary days feel less ordinary. you've been there through my good moods, my bad moods, my random thoughts, my stupid jokes, and all the parts of me that aren't always easy to deal with. and through all of it, you've given me memories, comfort, laughter, and happiness that i genuinely wouldn't trade for anything.</p>
 
-        <div class="bday-rule"></div>
+          <p>more than anything, i hope you find peace with yourself. i hope one day you see even a fraction of what everyone else sees when they look at you. i hope you stop being so hard on yourself. i hope you chase the things that make you happy without doubting whether you're good enough, because you are. i hope you wake up every morning knowing that you deserve kindness, love, success, and every good thing that comes your way. not because you've earned it by being perfect, but because you're already enough exactly as you are.</p>
+          
+          <p>and for the record, you do not need to lose weight, change yourself, or become somebody else to be beautiful. you already are. i've never looked at you and thought about what should be different. i've only ever looked at you and thought about how lucky i am that you exist.</p>
 
-        <!--
-          THE BIRTHDAY LETTER
-          ✏️ EDIT: Replace every paragraph with your own words.
-          This is the centrepiece — write it like no one will read it but her.
-          Be specific. Be honest. Don't hold anything back.
-        -->
-        <div class="bday-letter">
-
-          <p><!-- ✏️ EDIT: Opening line -->i don't have the right words. i never do when it comes to you. but i'm going to try anyway, because someone as special as you deserves more than a quick "happy birthday." you deserve to know how much light you bring into the lives around you, and how much brighter mine became the moment you walked into it.</p>
-
-          <p><!-- ✏️ EDIT: Something specific about her that you love -->one thing i've never forgotten is the way you get excited when you're talking about something you genuinely care about. the way your messages suddenly get longer, the way you keep going even when you think you're talking too much, and the way i could sit there for hours just reading every word. i don't think you realize how beautiful that is. i don't think you realize how beautiful you are in those moments, when you're completely yourself and not trying to impress anyone.</p>
-
-          <p><!-- ✏️ EDIT: What she means to you -->you've become such a huge part of my life that it's hard to remember what things felt like before you. somehow you've managed to make ordinary days feel less ordinary. you've been there through my good moods, my bad moods, my random thoughts, my stupid jokes, and all the parts of me that aren't always easy to deal with. and through all of it, you've given me memories, comfort, laughter, and happiness that i genuinely wouldn't trade for anything.</p>
-
-          <p><!-- ✏️ EDIT: What you wish for her on this birthday -->more than anything, i hope you find peace with yourself. i hope one day you see even a fraction of what everyone else sees when they look at you. i hope you stop being so hard on yourself. i hope you chase the things that make you happy without doubting whether you're good enough, because you are. i hope you wake up every morning knowing that you deserve kindness, love, success, and every good thing that comes your way. not because you've earned it by being perfect, but because you're already enough exactly as you are.
-
-and for the record, you do not need to lose weight, change yourself, or become somebody else to be beautiful. you already are. i've never looked at you and thought about what should be different. i've only ever looked at you and thought about how lucky i am that you exist.</p>
-
-          <p class="bday-final">
-            <!-- ✏️ EDIT: final closing truth
-
-if there's one thing i wish i could make you believe, it's this: the people who love you aren't loving some future version of you. they aren't waiting for you to be prettier, funnier, smarter, thinner, or more successful. they love you now. exactly as you are. and i do too.
-
-the truth is that you have no idea how much of an impact you leave behind everywhere you go. you make people smile without realizing it. you make bad days easier without trying. you make the world feel warmer just by being in it.
-
-and maybe one day years from now you'll forget some of the gifts you've received, some of the photos you've taken, and some of the birthdays you've celebrated. but i hope you never forget this:
-
-the world became a better place the day you were born.
-
-and my world became a better place the day i met you.
-
-happy birthday, my favorite person. 🫶 -->
+          <div class="bfinal">
             "thank you for being born. because if you weren't, i never would have met the person who quietly, permanently rearranged everything."
-          </p>
-
+          </div>
         </div>
-
-        <div class="bday-rule"></div>
-
-        <!-- ✏️ EDIT: Faryal Dawood -->
-        <p class="bday-from">forever yours,<br><em>— Dawood</em></p>
-
-        <button id="confettiBtn" class="confetti-btn">🎂 &nbsp; happy birthday &nbsp; 🎂</button>
+        
+        <div class="brule"></div>
+        
+        <p class="bfrom">forever yours,<br><em>— your husband g</em></p>
+        <button id="confBtn" class="cbtn" type="button">🎂 &nbsp; happy birthday &nbsp; 🎂</button>
       </div>
     </div>
-
-    <!-- Confetti container -->
-    <div id="confetti" aria-hidden="true"></div>
   </section>
 
-</div><!-- /siteBody -->
+</div>
 
-<script src="script.js"></script>
+<div class="modal-ov" id="letterOverlay">
+  <div class="letter-paper">
+    <button class="lc" id="letterClose" type="button">✕</button>
+    <div class="lt">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <h3 id="letterHeading" class="lh"></h3>
+    <div class="lr"></div>
+    <div id="letterBody" class="lb"></div>
+    <p class="lsig">with everything i have,<br><em>— your husband g</em></p>
+  </div>
+</div>
+
+<button id="musicToggle" class="mBtn" type="button">🔊</button>
+<div id="conf"></div>
+
+<audio id="audioTrack" loop src="song.mp3"></audio>
+
+<script>
+const LETTERS = {
+  sad: {
+    h: "open when you're sad",
+    b: `<p>hey, you.</p><p>i know today is heavy. i don't know exactly what's made it that way but i know you, and i know that when you feel things, you feel them completely. that's not a flaw. that's one of the most tender, real things about you.</p><p>please don't rush past this. sit with it for a minute. let it move through you. but don't let it lie to you—don't let it tell you you're alone in this, or that it won't pass, or that you're somehow less because today is hard.</p><p>it will pass. you will still be whole on the other side. and you will still be you—still everything, still enough, still the person i think about more than i will probably ever say out loud.</p>`
+  },
+  overthinking: {
+    h: "open when you're overthinking",
+    b: `<p>stop. breathe. put your phone down for a moment after you finish reading this.</p><p>you're in your head again. running through every possible version of something that may not even be real. preparing for catastrophes that probably won't arrive. i know you. you do this. and i say that with nothing but love.</p><p>here is what is actually true right now: you are safe. you are loved. the thing your brain is catastrophising about is almost certainly not as bad as it feels at whatever hour this is.</p>`
+  },
+  insecure: {
+    h: "open when you feel insecure",
+    b: `<p>listen to me.</p><p>whatever it is you're comparing yourself to right now—stop. it isn't fair to you. it isn't accurate. and it isn't the way i see you, not even a little.</p><p>you are not too much. you are not not enough. you are not behind, or wrong, or less than. you are exactly, specifically, irreplaceably yourself—and that version of you is one of the most remarkable things i have ever encountered.</p>`
+  },
+  miss: {
+    h: "open when you miss me",
+    b: `<p>you opened this one, which means you're thinking about me.</p><p>i want you to know i think about you too. more than makes rational sense. you've become the first thought in the morning and the last one at night, and honestly, i'm not even slightly sorry about that.</p><p>distance is a strange thing. it doesn't change how much i care—it just makes it louder somehow. like when everything goes quiet, the important things become the clearest.</p>`
+  },
+  reminder: {
+    h: "open when you need a reminder",
+    b: `<p>this is your reminder.</p><p>you are not who you were on your worst day. you are not the sum of your hardest moments. you are not what anyone who didn't take the time to know you has ever decided you are.</p><p>you are the person who shows up. who cares without being asked to. who notices the things other people walk past. who carries more than she lets on, and keeps going anyway.</p>`
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const enterBtn = document.getElementById("enterBtn");
+  const opening = document.getElementById("opening");
+  const site = document.getElementById("site");
+  const audio = document.getElementById("audioTrack");
+  const mBtn = document.getElementById("musicToggle");
+  const ov = document.getElementById("letterOverlay");
+  const lh = document.getElementById("letterHeading");
+  const lb = document.getElementById("letterBody");
+
+  // Portal trigger
+  enterBtn.addEventListener("click", () => {
+    opening.classList.add("out");
+    setTimeout(() => {
+      opening.style.display = "none";
+      site.style.display = "block";
+      audio.play().catch(() => {});
+      mBtn.classList.add("on");
+      initScrollEngine();
+    }, 900);
+  });
+
+  // Audio interface
+  mBtn.addEventListener("click", () => {
+    if(audio.paused) { audio.play(); mBtn.classList.add("on"); }
+    else { audio.pause(); mBtn.classList.remove("on"); }
+  });
+
+  // Card toggle mechanical click
+  document.querySelectorAll(".fc").forEach(c => {
+    c.addEventListener("click", () => c.classList.toggle("flip"));
+  });
+
+  // Overlay operations
+  document.querySelectorAll(".env").forEach(e => {
+    e.addEventListener("click", () => {
+      const d = LETTERS[e.dataset.l];
+      if(!d) return;
+      lh.textContent = d.h;
+      lb.innerHTML = d.b;
+      ov.classList.add("on");
+    });
+  });
+
+  document.getElementById("letterClose").addEventListener("click", () => ov.classList.remove("on"));
+
+  // Navigation system tracking
+  const sections = document.querySelectorAll("section");
+  const navItems = document.querySelectorAll(".ni");
+  
+  function initScrollEngine() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.querySelectorAll(".fade").forEach(f => f.classList.add("in"));
+          navItems.forEach(n => {
+            n.classList.toggle("on", n.dataset.t === entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(s => obs.observe(s));
+  }
+
+  navItems.forEach(n => {
+    n.addEventListener("click", () => {
+      document.getElementById(n.dataset.t).scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Celebration system triggers
+  document.getElementById("confBtn").addEventListener("click", () => {
+    const container = document.getElementById("conf");
+    for(let i=0; i<65; i++) {
+      const p = document.createElement("div");
+      p.className = "cp";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.backgroundColor = `hsl(${Math.random() * 360}deg, 85%, 75%)`;
+      p.style.width = Math.random() * 8 + 6 + "px";
+      p.style.height = Math.random() * 14 + 8 + "px";
+      p.style.animationDuration = Math.random() * 2 + 1.5 + "s";
+      container.appendChild(p);
+      setTimeout(() => p.remove(), 3500);
+    }
+  });
+
+  // Background star canvas architecture
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+  let dots = [];
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    dots = Array.from({length: 60}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5,
+      v: Math.random() * 0.02 + 0.005
+    }));
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function anim() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(243,235,217,0.4)";
+    dots.forEach(d => {
+      d.y -= d.v * 15;
+      if(d.y < 0) d.y = canvas.height;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    requestAnimationFrame(anim);
+  }
+  anim();
+});
+</script>
 </body>
 </html>
